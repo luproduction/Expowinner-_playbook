@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Book — Identidad Visual</title>
+<meta name="description" content="Brand Book digital — guía de identidad visual, colorimetría, tipografía y aplicaciones.">
+
+<!-- Tipografías: Montserrat (texto) + Archivo (sustituto libre de Tusker Grotesk, fuente comercial no distribuible por CDN) -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&amp;family=Archivo:wght@700;800;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="intro-active">
+
+<!-- ================= SPRITE DE ICONOS / CUBO ISOMÉTRICO ================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="icon-menu" viewBox="0 0 24 24">
+      <path d="M3 6h18M3 12h18M3 18h18"/>
+    </symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24">
+      <path d="M4 4l16 16M20 4L4 20"/>
+    </symbol>
+    <symbol id="icon-arrow-down" viewBox="0 0 24 24">
+      <path d="M12 4v14M6 12l6 6 6-6"/>
+    </symbol>
+    <symbol id="icon-card" viewBox="0 0 48 32">
+      <rect x="2" y="2" width="44" height="28" rx="3"/>
+      <line x1="2" y1="12" x2="46" y2="12"/>
+      <line x1="8" y1="20" x2="26" y2="20"/>
+    </symbol>
+    <symbol id="icon-doc" viewBox="0 0 40 48">
+      <path d="M6 2h20l8 8v36H6z"/>
+      <path d="M26 2v8h8"/>
+      <line x1="12" y1="24" x2="28" y2="24"/>
+      <line x1="12" y1="32" x2="28" y2="32"/>
+    </symbol>
+    <symbol id="icon-box" viewBox="0 0 48 48">
+      <path d="M24 4 44 14v20L24 44 4 34V14z"/>
+      <path d="M4 14 24 24l20-10M24 24v20"/>
+    </symbol>
+    <symbol id="icon-sign" viewBox="0 0 48 40">
+      <rect x="4" y="4" width="40" height="24" rx="2"/>
+      <line x1="24" y1="28" x2="24" y2="36"/>
+      <line x1="14" y1="36" x2="34" y2="36"/>
+    </symbol>
+    <symbol id="icon-phone" viewBox="0 0 28 48">
+      <rect x="2" y="2" width="24" height="44" rx="4"/>
+      <line x1="10" y1="42" x2="18" y2="42"/>
+    </symbol>
+    <symbol id="icon-social" viewBox="0 0 44 44">
+      <circle cx="22" cy="22" r="19"/>
+      <path d="M22 12v20M12 22h20"/>
+    </symbol>
+    <symbol id="icon-merch" viewBox="0 0 48 44">
+      <path d="M14 4 24 12l10-8 8 10-8 6v20H14V20L6 14z"/>
+    </symbol>
+    <symbol id="icon-uniform" viewBox="0 0 40 44">
+      <path d="M14 2 20 8l6-6 8 8-6 6v26H12V16L6 10z"/>
+    </symbol>
+    <symbol id="icon-vehicle" viewBox="0 0 52 32">
+      <path d="M6 22 10 10h20l8 6h6l2 6v6H6z"/>
+      <circle cx="16" cy="26" r="4"/>
+      <circle cx="40" cy="26" r="4"/>
+    </symbol>
+    <symbol id="icon-stand" viewBox="0 0 44 48">
+      <path d="M6 4h32v30H6z"/>
+      <line x1="22" y1="34" x2="22" y2="44"/>
+      <line x1="12" y1="44" x2="32" y2="44"/>
+    </symbol>
+    <symbol id="icon-web" viewBox="0 0 48 36">
+      <rect x="2" y="2" width="44" height="32" rx="3"/>
+      <line x1="2" y1="10" x2="46" y2="10"/>
+      <circle cx="7" cy="6" r="1.2"/>
+      <circle cx="11" cy="6" r="1.2"/>
+    </symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24">
+      <path d="M6 3l15 9-15 9V3z"/>
+    </symbol>
+    <symbol id="icon-wave" viewBox="0 0 32 24">
+      <path d="M1 12h4l3-9 5 18 5-18 3 9h10"/>
+    </symbol>
+    <symbol id="icon-aperture" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 2v6M12 16v6M2 12h6M16 12h6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M19.1 4.9l-4.2 4.2M9.1 14.9l-4.2 4.2"/>
+    </symbol>
+    <symbol id="icon-spark" viewBox="0 0 24 24">
+      <path d="M12 2v6M12 16v6M2 12h6M16 12h6"/>
+    </symbol>
+    <symbol id="icon-arrow-left" viewBox="0 0 24 24">
+      <path d="M15 4l-8 8 8 8"/>
+    </symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+      <path d="M9 4l8 8-8 8"/>
+    </symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24">
+      <path d="M12 3v13M6 11l6 6 6-6"/>
+      <path d="M4 20h16"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ================= MENÚ FLOTANTE (checkbox hack, sin JS) ================= -->
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<label for="nav-toggle" class="nav-backdrop" aria-hidden="true"></label>
+
+<div class="nav-fab-wrap">
+  <label for="nav-toggle" class="nav-fab" aria-label="Abrir menú de navegación">
+    <svg class="icon icon-open"><use href="#icon-menu"/></svg>
+    <svg class="icon icon-shut"><use href="#icon-close"/></svg>
+  </label>
+
+  <nav class="nav-menu" aria-label="Navegación de secciones">
+    <span class="nav-menu-eyebrow">Índice</span>
+    <a href="#Taglines">TAGLINE</a>
+    <a href="#video-manifiesto">Video Manifiesto</a>
+    <a href="#linea-visual">Línea Visual</a>
+    <a href="#tramas">Tramas</a>
+    <a href="#aplicaciones">Aplicaciones</a>
+  </nav>
+</div>
+
+<!-- ================= HERO — pantalla principal, fuera de la landing ================= -->
+<section id="hero" class="hero">
+
+  <!-- Espacio para el logo animado con fondo transparente -->
+  <div class="hero-logo-frame">    
+    <video class="hero-logo-video" autoplay muted loop playsinline>
+      <source src="Resource/Logomotion-ExpoWinners.webm" type="video/webm">
+    </video>
+  </div>
+
+  <button type="button" id="hero-enter" class="btn-liquid-glass">
+    <span>Esto es Expo Winner</span>
+  </button>
+
+</section>
+
+<!-- ================= LANDING — comienza en Concepto de Marca ================= -->
+<div id="landing">
+
+<!-- ================= CONCEPTO DE MARCA ================= -->
+<section id="concepto" class="section concepto glow-surface">
+  <div class="section-head">
+    <h2 class="section-title reveal-fade">TAGLINE</h2>
+  </div>
+
+  <div class="concepto-grid">
+    <div class="concepto-visual glass-panel reveal-image">
+      <div class="concepto-visual-glow" aria-hidden="true"><img class="Logo_Visual" src="Resource/logo_prinicipalexpowinner.png" alt=""></div>
+    </div>
+
+    <div class="concepto-copy">
+      <article class="concepto-block reveal-fade">
+        <span class="concepto-label">Concepto</span>
+        <p>La marca nace de una figura simple —el cubo— llevada a su expresión isométrica: tres caras, tres funciones, una sola estructura. Esa geometría se convierte en el lenguaje visual completo: modular, replicable y reconocible incluso reducida a su mínima expresión.</p>
+      </article>
+      <article class="concepto-block reveal-fade">
+        <span class="concepto-label">Propósito</span>
+        <p>Construir una identidad que comunique solidez sin volverse rígida. Cada aplicación —del ícono a la señalética— parte de la misma lógica de construcción, para que la marca se sienta coherente sin importar el soporte, el tamaño o el contexto.</p>
+      </article>
+      <article class="concepto-block reveal-fade">
+        <span class="concepto-label">Personalidad</span>
+        <p>Cálida pero precisa. El negro profundo aporta seriedad y espacio; el naranja y el ámbar aportan energía y cercanía. El resultado es una marca segura de sí misma, técnica en su construcción y humana en su tono.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VIDEO MANIFIESTO ================= -->
+<section id="video-manifiesto" class="video-manifiesto">
+  <div class="manifiesto-video-frame">
+    <!-- Reemplazar el src por el video manifiesto horizontal, formato 1920x1080 -->
+    <video class="manifiesto-video" autoplay muted loop playsinline>
+      <source src="Resource/OficialEXPOWINNER.mp4" type="video/mp4">
+    </video>
+    <div class="manifiesto-overlay" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ================= LÍNEA VISUAL ================= -->
+<section id="linea-visual" class="section linea-visual glow-surface">
+  <div class="section-head">
+    <h2 class="section-title reveal-fade">Línea Visual</h2>
+  </div>
+
+  <!-- Variaciones del logotipo -->
+  <h3 class="subsection-title reveal-fade">Variaciones del Logotipo</h3>
+  <div class="logo-variants logo-variants--3">
+    <div class="logo-card glass-panel reveal-image">
+      <div class="logo-card-stage">
+        <img class="logo-card-img" src="Resource/logo_prinicipalexpowinner.png" alt="Logo Principal">
+      </div>
+      <span class="logo-card-label">Logo Principal</span>
+      <a href="assets/logo-principal.zip" download class="btn-download">
+        <svg class="icon"><use href="#icon-download"/></svg>
+        <span>Descargar</span>
+      </a>
+    </div>
+    <div class="logo-card glass-panel reveal-image">
+      <div class="logo-card-stage">
+        <img class="logo-card-img" src="Resource/logoresponsive_prinicipalexpowinner.png" alt="Logo Responsive">
+      </div>
+      <span class="logo-card-label">Logo Responsive</span>
+      <a href="assets/logo-responsive.zip" download class="btn-download">
+        <svg class="icon"><use href="#icon-download"/></svg>
+        <span>Descargar</span>
+      </a>
+    </div>
+    <div class="logo-card glass-panel reveal-image">
+      <div class="logo-card-stage">
+        <img class="logo-card-img" src="Resource/logomedium_prinicipalexpowinner.png" alt="Logo Medium">
+      </div>
+      <span class="logo-card-label">Logo Medium</span>
+      <a href="assets/logo-medium.zip" download class="btn-download">
+        <svg class="icon"><use href="#icon-download"/></svg>
+        <span>Descargar</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Paleta de color -->
+  <h3 class="subsection-title reveal-fade">Paleta de Color</h3>
+  <div class="palette-row">
+    <div class="palette-pill reveal-image" style="--pc:#262626;">
+      <span class="palette-name">Carbón</span>
+      <span class="palette-hex">#262626</span>
+    </div>
+    <div class="palette-pill reveal-image" style="--pc:#ec6f2d;">
+      <span class="palette-name">Naranja</span>
+      <span class="palette-hex">#EC6F2D</span>
+    </div>
+    <div class="palette-pill palette-pill--dark-text reveal-image" style="--pc:#ffab31;">
+      <span class="palette-name">Ámbar</span>
+      <span class="palette-hex">#FFAB31</span>
+    </div>
+    <div class="palette-pill palette-pill--dark-text reveal-image" style="--pc:#ffffff;">
+      <span class="palette-name">Blanco</span>
+      <span class="palette-hex">#FFFFFF</span>
+    </div>
+  </div>
+
+  <!-- Tipografía -->
+  <h3 class="subsection-title reveal-fade">Tipografía</h3>
+  <div class="type-cards">
+    <div class="type-card glass-panel reveal-image">
+      <div class="type-card-sweep" aria-hidden="true"></div>
+      <span class="type-card-tag">Tipografía principal</span>
+      <h4 class="type-card-name type-card-name--tusker">Tusker Grotesk</h4>
+      <p class="type-card-sample type-card-sample--tusker">ABCDEFGHIJKLMN<br>ÑOPQRSTUVWXYZ 0123456789</p>
+      <p class="type-card-usage">Uso exclusivo en titulares, portadas y piezas de alto impacto. Siempre en mayúsculas, con tracking amplio.</p>
+    </div>
+    <div class="type-card glass-panel reveal-image">
+      <div class="type-card-sweep" aria-hidden="true"></div>
+      <span class="type-card-tag">Tipografía secundaria</span>
+      <h4 class="type-card-name type-card-name--montserrat">Montserrat</h4>
+      <p class="type-card-sample type-card-sample--montserrat">Abcdefghijklmn<br>ñopqrstuvwxyz 0123456789</p>
+      <p class="type-card-usage">Uso en cuerpo de texto, interfaces, etiquetas y comunicaciones extensas. Pesos recomendados: Regular, Medium y SemiBold.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRAMAS ================= -->
+<section id="tramas" class="section tramas glow-surface">
+  <div class="section-head">
+    <h2 class="section-title reveal-fade">Tramas</h2>
+  </div>
+  <p class="section-intro reveal-fade">Tres patrones geométricos derivados de la retícula isométrica del logotipo, disponibles como fondo de apoyo en piezas gráficas y digitales.</p>
+
+  <div class="tramas-grid tramas-grid--list">
+    <div class="pattern-card pattern-card--wide reveal-image">
+      <img class="pattern-img" src="Resource/trama_1.jpeg" alt="Retícula Isométrica">
+      <span class="pattern-label">Retícula Isométrica</span>
+    </div>
+    <div class="pattern-card pattern-card--wide reveal-image">
+      <img class="pattern-img" src="Resource/trama_2.jpeg" alt="Facetas">
+      <span class="pattern-label">Facetas</span>
+    </div>
+    <div class="pattern-card pattern-card--wide reveal-image">
+      <img class="pattern-img" src="Resource/trama_3.jpeg" alt="Diagonales">
+      <span class="pattern-label">Diagonales</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= APLICACIONES ================= -->
+<section id="aplicaciones" class="section aplicaciones glow-surface">
+  <div class="section-head">
+    <h2 class="section-title reveal-fade">Aplicaciones</h2>
+  </div>
+  <p class="section-intro reveal-fade">La identidad llevada a soportes reales: de la papelería al espacio físico, manteniendo siempre la misma lógica de construcción.</p>
+
+  <div class="coverflow-wrap">
+    <div class="coverflow" id="coverflow">
+      <figure class="coverflow-item" id="app-1">
+        <div class="app-card-media media--a"><img src="Resource/stand.png" alt=""><svg class="icon icon-lg"><use href="#icon-card"/></svg></div>
+        <figcaption>Tarjetas de Presentación</figcaption>
+      </figure>
+      <figure class="coverflow-item" id="app-2">
+        <div class="app-card-media media--b"><svg class="icon icon-lg"><use href="#icon-doc"/></svg></div>
+        <figcaption>Papelería Corporativa</figcaption>
+      </figure>
+      <figure class="coverflow-item" id="app-3">
+        <div class="app-card-media media--c"><svg class="icon icon-lg"><use href="#icon-box"/></svg></div>
+        <figcaption>Packaging</figcaption>
+      </figure>
+      <figure class="coverflow-item" id="app-4">
+        <div class="app-card-media media--d"><img src="Resource/detalles.png" alt=""><svg class="icon icon-lg"><use href="#icon-sign"/></svg></div>
+        <figcaption>Detalles</figcaption>
+      </figure>
+      <figure class="coverflow-item" id="app-5">
+        <div class="app-card-media media--e"><img src="Resource/phororoom.png" alt=""><svg class="icon icon-lg"><use href="#icon-phone"/></svg></div>
+        <figcaption>Experiencia inmersiva</figcaption>
+      </figure>
+      <figure class="coverflow-item" id="app-6">
+        <div class="app-card-media media--f"><img src="Resource/señaletica.png" alt=""><svg class="icon icon-lg"><use href="#icon-social"/></svg></div>
+        <figcaption>Señaletica</figcaption>
+      </figure>
+      <figure class="coverflow-item" id="app-8">
+        <div class="app-card-media media--h"><img src="Resource/camisa.png" alt=""><svg class="icon icon-lg"><use href="#icon-uniform"/></svg></div>
+        <figcaption>Merch</figcaption>
+      </figure>
+      <figure class="coverflow-item" id="app-10">
+        <div class="app-card-media media--j"><img src="Resource/stand.png" alt=""><svg class="icon icon-lg"><use href="#icon-stand"/></svg></div>
+        <figcaption>Stands / Evento</figcaption>
+      </figure>
+    </div>
+
+    <button type="button" id="cf-prev" class="cf-btn coverflow-nav coverflow-nav--prev" aria-label="Aplicación anterior">
+      <svg class="icon"><use href="#icon-arrow-left"/></svg>
+    </button>
+    <button type="button" id="cf-next" class="cf-btn coverflow-nav coverflow-nav--next" aria-label="Siguiente aplicación">
+      <svg class="icon"><use href="#icon-arrow-right"/></svg>
+    </button>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <svg class="cube cube--footer cube--white-orange-amber" viewBox="0 0 200 200"><use href="#icon-cube"/></svg>
+  <p>Brand Book — Guía de Identidad Visual</p>
+</footer>
+
+</div><!-- /#landing -->
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- 1) Pantalla principal (hero): salida al hacer click ---- */
+  var heroBtn = document.getElementById('hero-enter');
+  var hero = document.getElementById('hero');
+  if (heroBtn && hero) {
+    heroBtn.addEventListener('click', function () {
+      hero.classList.add('hero--exit');
+      document.body.classList.remove('intro-active');
+      window.setTimeout(function () { hero.style.display = 'none'; }, 750);
+    });
+  }
+
+  /* ---- 2) Carrusel de Aplicaciones: coverflow real + botones anterior/siguiente ---- */
+  var track = document.getElementById('coverflow');
+  if (track) {
+    var items = Array.prototype.slice.call(track.querySelectorAll('.coverflow-item'));
+    var prevBtn = document.getElementById('cf-prev');
+    var nextBtn = document.getElementById('cf-next');
+    var ticking = false;
+
+    function updateCoverflow() {
+      var rect = track.getBoundingClientRect();
+      var center = rect.left + rect.width / 2;
+
+      items.forEach(function (item) {
+        var r = item.getBoundingClientRect();
+        var itemCenter = r.left + r.width / 2;
+        var dist = (itemCenter - center) / (rect.width / 2);
+        var clamped = Math.max(-1.3, Math.min(1.3, dist));
+        var rotate = clamped * -30;
+        var scale = 1 - Math.min(Math.abs(clamped), 1) * 0.22;
+        var opacity = 1 - Math.min(Math.abs(clamped), 1) * 0.5;
+        item.style.transform = 'rotateY(' + rotate.toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
+        item.style.opacity = opacity.toFixed(3);
+        item.style.zIndex = String(100 - Math.round(Math.abs(clamped) * 100));
+      });
+
+      if (prevBtn) prevBtn.classList.toggle('is-disabled', track.scrollLeft <= 4);
+      if (nextBtn) {
+        var maxScroll = track.scrollWidth - track.clientWidth;
+        nextBtn.classList.toggle('is-disabled', track.scrollLeft >= maxScroll - 4);
+      }
+      ticking = false;
+    }
+
+    function requestUpdate() {
+      if (!ticking) {
+        window.requestAnimationFrame(updateCoverflow);
+        ticking = true;
+      }
+    }
+
+    function step(direction) {
+      var card = items[0];
+      var gap = 48;
+      var width = card ? card.getBoundingClientRect().width + gap : 300;
+      track.scrollBy({ left: direction * width, behavior: 'smooth' });
+    }
+
+    track.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    if (prevBtn) prevBtn.addEventListener('click', function () { step(-1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { step(1); });
+
+    updateCoverflow();
+  }
+})();
+</script>
+
+</body>
+</html>
