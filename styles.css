@@ -852,6 +852,7 @@ body.intro-active{ overflow:hidden; height:100vh; }
   box-shadow:var(--glass-shadow);
   backdrop-filter:blur(18px) saturate(150%);
   transform-style:preserve-3d;
+  opacity: 1 !important;
   transition:transform .45s var(--ease-out), opacity .45s var(--ease-out), box-shadow .45s var(--ease-out);
   will-change:transform, opacity;
 }
@@ -1146,10 +1147,10 @@ body.intro-active{ overflow:hidden; height:100vh; }
   position:relative;
   width:clamp(84px, 9vw, 112px);
   height:clamp(84px, 9vw, 112px);
-  border-radius:50%;
-  background:linear-gradient(160deg, #1d1c1c 0%, #000000 100%);
-  border:1px solid var(--glass-border);
-  box-shadow:var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.8);
+  /*border-radius:50%;*/
+  /*background:linear-gradient(160deg, #1d1c1c 0%, #000000 100%);*/
+  /*border:1px solid var(--glass-border);*/
+  /*box-shadow:var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.8);*/
   display:flex; align-items:center; justify-content:center;
   padding:16px;
   cursor:pointer;
@@ -1158,7 +1159,7 @@ body.intro-active{ overflow:hidden; height:100vh; }
 .marca-capsula img{ width:100%; height:100%; object-fit:contain; }
 .marca-capsula:hover{
   transform:translateY(-10px) scale(1.06);
-  box-shadow:0 26px 56px rgba(40,30,20,0.2), 0 0 46px rgba(var(--orange-rgb),0.24), inset 0 1px 0 rgba(255,255,255,0.85);
+  /*box-shadow:0 26px 56px rgba(40,30,20,0.2), 0 0 46px rgba(var(--orange-rgb),0.24), inset 0 1px 0 rgba(255,255,255,0.85);*/
 }
 .marca-tooltip{
   position:absolute;
@@ -1260,7 +1261,7 @@ body.intro-active{ overflow:hidden; height:100vh; }
   .reveal-image{
     opacity:0; transform:translateY(56px) scale(.96);
     animation:reveal-image-kf linear both;
-    animation-timeline:view();
+    /*animation-timeline:view();*/
     animation-range:entry 0% cover 40%;
   }
   .concepto-block.reveal-fade:nth-child(2){ animation-range:entry 6% cover 38%; }
@@ -1296,4 +1297,216 @@ body.intro-active{ overflow:hidden; height:100vh; }
   .manifiesto-video-frame{ height:70vh; }
   .showcase-cards{ grid-template-columns:1fr; }
   .footer-top{ flex-direction:column; gap:18px; }
+}
+
+/* ============================================================
+   OBJETIVOS COMERCIALES — tarjetas naranjas + modal liquid glass
+   ============================================================ */
+.objetivos-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:24px;
+}
+.objetivo-card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding:32px 28px 30px;
+  border-radius:var(--radius-lg);
+  color:#fff;
+  overflow:hidden;
+  background:
+    linear-gradient(155deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 50%),
+    linear-gradient(160deg, var(--orange) 0%, #c9591d 100%);
+  border:1px solid rgba(255,255,255,0.18);
+  box-shadow:0 20px 50px rgba(var(--orange-rgb),0.28), inset 0 1px 0 rgba(255,255,255,0.3);
+  transition:transform .5s var(--ease-out), box-shadow .5s var(--ease-out), filter .5s var(--ease-soft);
+}
+.objetivo-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.5) 46%, transparent 62%);
+  transform:translateX(-140%);
+  transition:transform 1s var(--ease-out);
+  pointer-events:none;
+}
+.objetivo-card:hover{
+  transform:translateY(-10px);
+  filter:brightness(1.1) saturate(1.08);
+  box-shadow:0 32px 70px rgba(var(--orange-rgb),0.46), 0 0 60px rgba(var(--orange-rgb),0.36), inset 0 1px 0 rgba(255,255,255,0.35);
+}
+.objetivo-card:hover::before{ transform:translateX(140%); }
+.objetivo-title{
+  font-family:var(--font-display);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:0.01em;
+  font-size:clamp(18px, 2vw, 22px);
+  line-height:1.14;
+  position:relative; z-index:1;
+}
+.objetivo-summary{
+  font-size:14px;
+  line-height:1.5;
+  color:rgba(255,255,255,0.92);
+  flex:1;
+  position:relative; z-index:1;
+}
+.objetivo-card .btn-liquid-glass{ position:relative; z-index:1; align-self:flex-start; margin-top:4px; }
+.btn-liquid-glass--sm{ padding:12px 26px; font-size:13px; }
+
+@media (max-width:1080px){ .objetivos-grid{ grid-template-columns:repeat(2, 1fr); } }
+@media (max-width:640px){ .objetivos-grid{ grid-template-columns:1fr; } }
+
+/* Toggles ocultos (checkbox hack, sin JS) */
+.modal-toggle{ position:absolute; width:0; height:0; opacity:0; pointer-events:none; }
+
+/* Modal tarjeta blanca liquid glass */
+.objetivo-modal-wrap{
+  position:fixed; inset:0;
+  z-index:200;
+  display:flex; align-items:center; justify-content:center;
+  padding:24px;
+  opacity:0; visibility:hidden;
+  pointer-events:none;
+  transition:opacity .45s var(--ease-soft), visibility .45s;
+}
+.objetivo-modal-backdrop{
+  position:absolute; inset:0;
+  background:rgba(22,24,26,0.5);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  cursor:pointer;
+}
+.objetivo-modal{
+  position:relative; z-index:2;
+  width:100%; max-width:560px;
+  padding:clamp(32px, 5vw, 52px);
+  background:rgba(255,255,255,0.82);
+  border:1px solid rgba(255,255,255,0.7);
+  border-radius:var(--radius-lg);
+  backdrop-filter:blur(30px) saturate(180%);
+  -webkit-backdrop-filter:blur(30px) saturate(180%);
+  box-shadow:0 40px 90px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.85);
+  transform:translateY(24px) scale(.97);
+  transition:transform .5s var(--ease-out);
+}
+.objetivo-modal-close{
+  position:absolute; top:18px; right:18px;
+  width:38px; height:38px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(22,24,26,0.06);
+  color:var(--ink);
+  cursor:pointer;
+  transition:background .3s var(--ease-soft), transform .3s var(--ease-soft);
+}
+.objetivo-modal-close:hover{ background:rgba(22,24,26,0.12); transform:rotate(90deg); }
+.objetivo-modal-close .icon{ width:16px; height:16px; }
+.objetivo-modal-title{
+  font-family:var(--font-display);
+  font-weight:800;
+  text-transform:uppercase;
+  font-size:clamp(24px, 3.2vw, 34px);
+  line-height:1.08;
+  margin:16px 0 18px;
+  color:var(--ink);
+}
+.objetivo-modal-text{ font-size:15.5px; color:var(--text-mid); max-width:48ch; }
+
+#obj-modal-1:checked ~ #modal-1,
+#obj-modal-2:checked ~ #modal-2,
+#obj-modal-3:checked ~ #modal-3,
+#obj-modal-4:checked ~ #modal-4{
+  opacity:1; visibility:visible; pointer-events:auto;
+}
+#obj-modal-1:checked ~ #modal-1 .objetivo-modal,
+#obj-modal-2:checked ~ #modal-2 .objetivo-modal,
+#obj-modal-3:checked ~ #modal-3 .objetivo-modal,
+#obj-modal-4:checked ~ #modal-4 .objetivo-modal{
+  transform:translateY(0) scale(1);
+}
+
+/* ============================================================
+   LIGHTBOX GENÉRICO — zoom al clic (Tienda Merch / Experiencia)
+   ============================================================ */
+.zoom-overlay{
+  position:fixed; inset:0;
+  z-index:220;
+  display:flex; align-items:center; justify-content:center;
+  padding:40px;
+  opacity:0; visibility:hidden;
+  pointer-events:none;
+  transition:opacity .45s var(--ease-soft), visibility .45s;
+}
+.zoom-backdrop{
+  position:absolute; inset:0;
+  background:rgba(10,10,10,0.88);
+  cursor:zoom-out;
+}
+.zoom-img{
+  position:relative; z-index:2;
+  max-width:92vw; max-height:88vh;
+  object-fit:contain;
+  border-radius:14px;
+  box-shadow:0 40px 100px rgba(0,0,0,0.5);
+  cursor:zoom-out;
+  transform:scale(.94);
+  transition:transform .45s var(--ease-out);
+}
+#tienda-zoom-toggle:checked ~ #tienda-zoom-overlay,
+#exp-zoom-1:checked ~ #exp-zoom-overlay-1,
+#exp-zoom-2:checked ~ #exp-zoom-overlay-2,
+#exp-zoom-3:checked ~ #exp-zoom-overlay-3{
+  opacity:1; visibility:visible; pointer-events:auto;
+}
+#tienda-zoom-toggle:checked ~ #tienda-zoom-overlay .zoom-img,
+#exp-zoom-1:checked ~ #exp-zoom-overlay-1 .zoom-img,
+#exp-zoom-2:checked ~ #exp-zoom-overlay-2 .zoom-img,
+#exp-zoom-3:checked ~ #exp-zoom-overlay-3 .zoom-img{
+  transform:scale(1);
+}
+
+/* ============================================================
+   MARCAS ALIADAS — franja naranja de fondo
+   ============================================================ */
+.marcas-strip{
+  position:relative;
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding:clamp(40px, 6vw, 64px) clamp(20px, 6vw, 80px);
+  /*background:linear-gradient(120deg, var(--orange) 0%, #c9591d 100%);*/
+  display:flex; justify-content:center;
+}
+.marcas-strip .marcas-row{ width:100%; max-width:1280px; }
+.marca-capsula:hover{
+  transform:scale(1.16);
+  /*box-shadow:0 26px 56px rgba(0,0,0,0.28), 0 0 46px rgba(255,255,255,0.3), inset 0 1px 0 rgba(255,255,255,0.85);*/
+}
+
+/* ============================================================
+   TIENDA MERCH — imagen horizontal 1920x1080 con zoom al clic
+   ============================================================ */
+.tienda-hero{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:var(--glass-shadow);
+  cursor:zoom-in;
+  margin-bottom:clamp(32px, 5vw, 48px);
+}
+.tienda-hero-img{ width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease-out); }
+.tienda-hero:hover .tienda-hero-img{ transform:scale(1.04); }
+
+/* ============================================================
+   EXPERIENCIA — variaciones verticales con zoom al clic
+   ============================================================ */
+.experiencia-thumb{ aspect-ratio:3/4; cursor:zoom-in; display:block; }
+
+@media (max-width:700px){
+  .experiencia-thumb{ aspect-ratio:4/3; }
 }
