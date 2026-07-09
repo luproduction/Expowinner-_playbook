@@ -101,6 +101,29 @@
   </defs>
 </svg>
 
+<!-- ================= MENÚ SUPERIOR — barra fija con logo central ================= -->
+<header class="top-nav">
+  <nav class="top-nav-links top-nav-links--left" aria-label="Secciones (parte 1)">
+    <a href="#que-es-expowinner">Qué es</a>
+    <a href="#concepto">Tagline</a>
+    <a href="#linea-visual">Línea Visual</a>
+    <a href="#tramas">Tramas</a>
+  </nav>
+
+  <a href="#hero" class="top-nav-logo" aria-label="Inicio">
+    <img src="Resource/favicon.png" alt="Expo Winner">
+  </a>
+
+  <nav class="top-nav-links top-nav-links--right" aria-label="Secciones (parte 2)">
+    <a href="#aplicaciones">Aplicaciones</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#espacio">Espacio</a>
+    <a href="#web">Web</a>
+    <a href="#marcas-aliadas">Marcas</a>
+    <a href="#tienda-mercha">Tienda</a>
+  </nav>
+</header>
+
 <!-- ================= MENÚ FLOTANTE (checkbox hack, sin JS) ================= -->
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
 <label for="nav-toggle" class="nav-backdrop" aria-hidden="true"></label>
@@ -113,11 +136,17 @@
 
   <nav class="nav-menu" aria-label="Navegación de secciones">
     <span class="nav-menu-eyebrow">Índice</span>
+    <a href="#que-es-expowinner">¿Qué es Expo Winner?</a>
     <a href="#Taglines">TAGLINE</a>
     <a href="#video-manifiesto">Video Manifiesto</a>
     <a href="#linea-visual">Línea Visual</a>
     <a href="#tramas">Tramas</a>
     <a href="#aplicaciones">Aplicaciones</a>
+    <a href="#experiencia">Experiencia</a>
+    <a href="#espacio">Espacio</a>
+    <a href="#web">Web</a>
+    <a href="#marcas-aliadas">Marcas Aliadas</a>
+    <a href="#tienda-mercha">Tienda Mercha</a>
   </nav>
 </div>
 
@@ -139,6 +168,26 @@
 
 <!-- ================= LANDING — comienza en Concepto de Marca ================= -->
 <div id="landing">
+
+<!-- ================= ¿QUÉ ES EXPO WINNER? — imagen de fondo + ventana glass ================= -->
+<section id="que-es-expowinner" class="section showcase glow-surface">
+  <div class="showcase-frame">
+    <img class="showcase-bg" src="Resource/FONDO INICIAL ESPACIO.png" alt="" loading="lazy">
+    <div class="showcase-overlay" aria-hidden="true"></div>
+
+    <div class="showcase-window glass-panel reveal-image">
+      <span class="eyebrow">Expo Winner</span>
+      <h2 class="showcase-title">¿Qué es<br>Expo Winner?</h2>
+      <p class="showcase-text">Expo Winner es la experiencia insignia que reúne innovación, marca y comunidad en un mismo espacio: un punto de encuentro donde la identidad visual cobra vida a través de ambientes inmersivos, contenido y activaciones diseñadas para conectar con cada visitante.</p>
+      <a href="assets/brochure-expowinner.pdf" download class="btn-cta">
+        <svg class="icon"><use href="#icon-download"/></svg>
+        <span>Descarga el brochure completo</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true"><span></span></div>
 
 <!-- ================= CONCEPTO DE MARCA ================= -->
 <section id="concepto" class="section concepto glow-surface">
@@ -168,6 +217,8 @@
   </div>
 </section>
 
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
 <!-- ================= VIDEO MANIFIESTO ================= -->
 <section id="video-manifiesto" class="video-manifiesto">
   <div class="manifiesto-video-frame">
@@ -179,6 +230,8 @@
   </div>
 </section>
 
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
 <!-- ================= LÍNEA VISUAL ================= -->
 <section id="linea-visual" class="section linea-visual glow-surface">
   <div class="section-head">
@@ -187,7 +240,7 @@
 
   <!-- Variaciones del logotipo -->
   <h3 class="subsection-title reveal-fade">Variaciones del Logotipo</h3>
-  <div class="logo-variants logo-variants--3">
+  <div class="logo-variants logo-variants--2">
     <div class="logo-card glass-panel reveal-image">
       <div class="logo-card-stage">
         <img class="logo-card-img" src="Resource/logo_prinicipalexpowinner.png" alt="Logo Principal">
@@ -204,16 +257,6 @@
       </div>
       <span class="logo-card-label">Logo Responsive</span>
       <a href="assets/logo-responsive.zip" download class="btn-download">
-        <svg class="icon"><use href="#icon-download"/></svg>
-        <span>Descargar</span>
-      </a>
-    </div>
-    <div class="logo-card glass-panel reveal-image">
-      <div class="logo-card-stage">
-        <img class="logo-card-img" src="Resource/logomedium_prinicipalexpowinner.png" alt="Logo Medium">
-      </div>
-      <span class="logo-card-label">Logo Medium</span>
-      <a href="assets/logo-medium.zip" download class="btn-download">
         <svg class="icon"><use href="#icon-download"/></svg>
         <span>Descargar</span>
       </a>
@@ -261,6 +304,8 @@
   </div>
 </section>
 
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
 <!-- ================= TRAMAS ================= -->
 <section id="tramas" class="section tramas glow-surface">
   <div class="section-head">
@@ -284,6 +329,7 @@
   </div>
 </section>
 
+<div class="section-divider" aria-hidden="true"><span></span></div>
 
 <!-- ================= APLICACIONES ================= -->
 <section id="aplicaciones" class="section aplicaciones glow-surface">
@@ -307,7 +353,7 @@
         <figcaption>Packaging</figcaption>
       </figure>
       <figure class="coverflow-item" id="app-4">
-        <div class="app-card-media media--d"><img src="Resource/detalles.png" alt=""><svg class="icon icon-lg"><use href="#icon-sign"/></svg></div>
+        <div class="app-card-media media--d"><img src="Resource/detalles.jpeg" alt=""><svg class="icon icon-lg"><use href="#icon-sign"/></svg></div>
         <figcaption>Detalles</figcaption>
       </figure>
       <figure class="coverflow-item" id="app-5">
@@ -337,9 +383,161 @@
   </div>
 </section>
 
-<footer class="site-footer">
-  <svg class="cube cube--footer cube--white-orange-amber" viewBox="0 0 200 200"><use href="#icon-cube"/></svg>
-  <p>Brand Book — Guía de Identidad Visual</p>
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
+<!-- ================= EXPERIENCIA — imagen principal horizontal + carrusel ================= -->
+<section id="experiencia" class="section experiencia glow-surface">
+  <div class="section-head">
+    <h2 class="section-title reveal-fade">Experiencia</h2>
+  </div>
+  <p class="section-intro reveal-fade">La atmósfera Expo Winner en su máxima expresión: un recorrido visual por los momentos más representativos de la experiencia en vivo.</p>
+
+  <div class="experiencia-main reveal-image">
+    <img class="experiencia-main-img" src="Resource/FONDO INICIAL ESPACIO.png" alt="Experiencia Expo Winner">
+  </div>
+
+  <div class="experiencia-carousel">
+    <div class="experiencia-thumb reveal-image">
+      <img src="Resource/visual expowinner_stand.png" alt="Experiencia Expo Winner 1">
+    </div>
+    <div class="experiencia-thumb reveal-image">
+      <img src="Resource/visual_2stand.png" alt="Experiencia Expo Winner 2">
+    </div>
+    <div class="experiencia-thumb reveal-image">
+      <img src="Resource/lideres.png" alt="Experiencia Expo Winner 3">
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
+<!-- ================= ESPACIO — imagen a la izquierda, texto a la derecha ================= -->
+<section id="espacio" class="section espacio glow-surface">
+  <div class="espacio-grid">
+    <div class="espacio-visual">
+      <img class="espacio-img" src="Resource/ImagenApp.png" alt="Espacio Expo Winner">
+    </div>
+
+    <div class="espacio-copy">
+      <span class="eyebrow reveal-fade">Espacio</span>
+      <h2 class="section-title espacio-title reveal-fade">Experiencia<br>Expo Winner</h2>
+      <p class="espacio-text reveal-fade">Un espacio diseñado para que la marca se viva en tres dimensiones: materiales, luz y recorrido trabajan juntos para transformar la identidad visual en una experiencia física, coherente en cada rincón y memorable para cada visitante.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
+<!-- ================= WEB — CTA a la landing ================= -->
+<section id="web" class="section web-section glow-surface">
+  <div class="web-panel glass-panel reveal-image">
+    <span class="eyebrow">Web</span>
+    <h2 class="section-title web-title">Conoce más sobre Expo Winner</h2>
+    <p class="web-text">Explora el sitio web oficial de Expo Winner y descubre agenda, expositores, contenidos y todo lo que necesitas para vivir la experiencia completa.</p>
+    <a href="https://expowinner.com" target="_blank" rel="noopener" class="btn-cta">
+      <span>Ir a la landing de Expo Winner</span>
+      <svg class="icon"><use href="#icon-arrow-right"/></svg>
+    </a>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
+<!-- ================= MARCAS ALIADAS — cápsulas tipo globo con tooltip al hover ================= -->
+<section id="marcas-aliadas" class="section marcas glow-surface">
+  <div class="section-head">
+    <h2 class="section-title reveal-fade">Marcas Aliadas</h2>
+  </div>
+  <p class="section-intro reveal-fade">Un ecosistema de marcas que se suman a la experiencia Expo Winner.</p>
+
+  <div class="marcas-row">
+    <div class="marca-capsula reveal-image">
+      <img src="Resource/academy.png" alt="Dropi Academy">
+      <span class="marca-tooltip">Dropi Academy</span>
+    </div>
+    <div class="marca-capsula reveal-image">
+      <img src="Resource/CATEA PRO.png" alt="Chatea Pro">
+      <span class="marca-tooltip">Chatea Pro</span>
+    </div>
+    <div class="marca-capsula reveal-image">
+      <img src="Resource/veloces.png" alt="Veloces">
+      <span class="marca-tooltip">Veloces</span>
+    </div>
+    <div class="marca-capsula reveal-image">
+      <img src="Resource/PAU.png" alt="PAU">
+      <span class="marca-tooltip">PAU</span>
+    </div>
+    <div class="marca-capsula reveal-image">
+      <img src="Resource/CONFIO.png" alt="Confio Pagos">
+      <span class="marca-tooltip">Confio Pagos</span>
+    </div>
+    <div class="marca-capsula reveal-image">
+      <img src="Resource/roax.png" alt="Marca aliada 6">
+      <span class="marca-tooltip">Marca Aliada 6</span>
+    </div>
+    <div class="marca-capsula reveal-image">
+      <img src="Resource/dropi card.png" alt="Marca aliada 7">
+      <span class="marca-tooltip">Marca Aliada 7</span>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true"><span></span></div>
+
+<!-- ================= TIENDA MERCHA EXPO WINNER — 3 productos tipo ecommerce ================= -->
+<section id="tienda-Merch" class="section tienda glow-surface">
+  <div class="section-head">
+    <h2 class="section-title reveal-fade">Tienda Merch Expo Winner</h2>
+  </div>
+  <p class="section-intro reveal-fade">Lleva la marca contigo: la colección oficial de merchandising Expo Winner.</p>
+
+  <div class="producto-grid">
+    <div class="producto-card glass-panel reveal-image">
+      <div class="producto-media">
+        <img src="Resource/merch 2.jpeg" alt="Producto Mercha Expo Winner 1">
+      </div>
+      <h3 class="producto-name">Camiseta Expo Winner</h3>
+      <p class="producto-price">$79.900</p>
+      <a href="#" class="btn-download">
+        <svg class="icon"><use href="#icon-merch"/></svg>
+        <span>Comprar</span>
+      </a>
+    </div>
+    <div class="producto-card glass-panel reveal-image">
+      <div class="producto-media">
+        <img src="Resource/merch 6.jpeg" alt="Producto Mercha Expo Winner 2">
+      </div>
+      <h3 class="producto-name">Gorra Expo Winner</h3>
+      <p class="producto-price">$59.900</p>
+      <a href="#" class="btn-download">
+        <svg class="icon"><use href="#icon-merch"/></svg>
+        <span>Comprar</span>
+      </a>
+    </div>
+    <div class="producto-card glass-panel reveal-image">
+      <div class="producto-media">
+        <img src="Resource/merch5.jpeg" alt="Producto Mercha Expo Winner 3">
+      </div>
+      <h3 class="producto-name">T-shirt Expo winner</h3>
+      <p class="producto-price">$45.900</p>
+      <a href="#" class="btn-download">
+        <svg class="icon"><use href="#icon-merch"/></svg>
+        <span>Comprar</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer site-footer--orange">
+  <div class="footer-top">
+    <svg class="cube cube--footer cube--mono-white" viewBox="0 0 200 200"><use href="#icon-cube"/></svg>
+    <nav class="footer-links" aria-label="Enlaces legales">
+      <a href="#">Quiénes somos</a>
+      <a href="#">Términos y condiciones</a>
+      <a href="#">Términos legales</a>
+    </nav>
+  </div>
+  <p class="footer-copy">© Derechos reservados Dropi 2026</p>
 </footer>
 
 </div><!-- /#landing -->
