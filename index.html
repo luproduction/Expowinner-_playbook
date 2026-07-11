@@ -98,6 +98,14 @@
       <path d="M12 3v13M6 11l6 6 6-6"/>
       <path d="M4 20h16"/>
     </symbol>
+    <symbol id="icon-audio-on" viewBox="0 0 24 24">
+      <path d="M4 9v6h4l6 5V4l-6 5H4z"/>
+      <path d="M17.5 8.5a5 5 0 0 1 0 7M20 6a8.5 8.5 0 0 1 0 12"/>
+    </symbol>
+    <symbol id="icon-audio-off" viewBox="0 0 24 24">
+      <path d="M4 9v6h4l6 5V4l-6 5H4z"/>
+      <path d="M17 9l5 6M22 9l-5 6"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -121,7 +129,6 @@
     <a href="#espacio">Espacio</a>
     <a href="#web">Web</a>
     <a href="#marcas-aliadas">Marcas</a>
-    <a href="#tienda-mercha">Tienda</a>
   </nav>
 </header>
 
@@ -148,7 +155,6 @@
     <a href="#espacio">Espacio</a>
     <a href="#web">Web</a>
     <a href="#marcas-aliadas">Marcas Aliadas</a>
-    <a href="#tienda-mercha">Tienda Mercha</a>
   </nav>
 </div>
 
@@ -186,6 +192,18 @@
         <span>Descarga el brochure completo</span>
       </a>
     </div>
+  </div>
+
+  <div class="section-divider video-intro-divider" aria-hidden="true"><span></span></div>
+
+  <p class="video-intro-text reveal-fade">Descubre en el siguiente video la esencia de ExpoWinner y la experiencia que da vida a este gran evento.</p>
+
+  <div class="video-intro-capsule reveal-image">
+    <!-- Reemplazar el src por el video destacado, formato horizontal 1920x1080 -->
+    <!-- Sin atributo "poster": el navegador muestra el primer frame real del propio video como miniatura, en vez de una imagen externa -->
+    <video class="video-intro-player" controls playsinline preload="auto">
+      <source src="Resource/Qué es Expowinner Final.mp4" type="video/mp4">
+    </video>
   </div>
 </section>
 
@@ -323,12 +341,21 @@
 
 <!-- ================= VIDEO MANIFIESTO ================= -->
 <section id="video-manifiesto" class="video-manifiesto">
-  <div class="manifiesto-video-frame">
+  <div class="manifiesto-video-frame" id="manifiesto-frame">
     <!-- Reemplazar el src por el video manifiesto horizontal, formato 1920x1080 -->
-    <video class="manifiesto-video" autoplay muted loop playsinline>
+    <video class="manifiesto-video" id="manifiesto-video" muted loop playsinline preload="metadata">
       <source src="Resource/OficialEXPOWINNER.mp4" type="video/mp4">
     </video>
     <div class="manifiesto-overlay" aria-hidden="true"></div>
+    <div class="manifiesto-audio-control" id="manifiesto-audio-control">
+      <div class="manifiesto-volume-wrap">
+        <input type="range" id="manifiesto-volume" class="manifiesto-volume-slider" min="0" max="1" step="0.01" value="1" aria-label="Volumen del video">
+      </div>
+      <button type="button" id="manifiesto-audio-toggle" class="btn-liquid-glass manifiesto-audio-btn" aria-label="Activar audio del video">
+        <svg class="icon icon-audio-on"><use href="#icon-audio-on"/></svg>
+        <svg class="icon icon-audio-off"><use href="#icon-audio-off"/></svg>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -440,48 +467,35 @@
   </div>
   <p class="section-intro reveal-fade">La identidad llevada a soportes reales: de la papelería al espacio físico, manteniendo siempre la misma lógica de construcción.</p>
 
-  <div class="coverflow-wrap">
-    <div class="coverflow" id="coverflow">
-      <figure class="coverflow-item" id="app-1">
-        <div class="app-card-media media--a"><img src="Resource/stand.png" alt=""><svg class="icon icon-lg"><use href="#icon-card"/></svg></div>
+  <div class="carousel3d-wrap reveal-image">
+    <div class="carousel3d" id="carousel3d">
+      <figure class="carousel3d-item" data-index="0">
+        <img src="Resource/stand.png" alt="Tarjetas de Presentación">
         <figcaption>Tarjetas de Presentación</figcaption>
       </figure>
-      <figure class="coverflow-item" id="app-2">
-        <div class="app-card-media media--b"><svg class="icon icon-lg"><use href="#icon-doc"/></svg></div>
-        <figcaption>Papelería Corporativa</figcaption>
-      </figure>
-      <figure class="coverflow-item" id="app-3">
-        <div class="app-card-media media--c"><svg class="icon icon-lg"><use href="#icon-box"/></svg></div>
-        <figcaption>Packaging</figcaption>
-      </figure>
-      <figure class="coverflow-item" id="app-4">
-        <div class="app-card-media media--d"><img src="Resource/detalles.jpeg" alt=""><svg class="icon icon-lg"><use href="#icon-sign"/></svg></div>
+      <figure class="carousel3d-item" data-index="1">
+        <img src="Resource/detalles.jpeg" alt="Detalles">
         <figcaption>Detalles</figcaption>
       </figure>
-      <figure class="coverflow-item" id="app-5">
-        <div class="app-card-media media--e"><img src="Resource/phororoom.png" alt=""><svg class="icon icon-lg"><use href="#icon-phone"/></svg></div>
+      <figure class="carousel3d-item" data-index="2">
+        <img src="Resource/phororoom.png" alt="Experiencia inmersiva">
         <figcaption>Experiencia inmersiva</figcaption>
       </figure>
-      <figure class="coverflow-item" id="app-6">
-        <div class="app-card-media media--f"><img src="Resource/SEÑALETICA.jpg.jpeg" alt=""><svg class="icon icon-lg"><use href="#icon-social"/></svg></div>
-        <figcaption>Señaletica</figcaption>
+      <figure class="carousel3d-item" data-index="3">
+        <img src="Resource/SEÑALETICA.jpg.jpeg" alt="Señalética">
+        <figcaption>Señalética</figcaption>
       </figure>
-      <figure class="coverflow-item" id="app-8">
-        <div class="app-card-media media--h"><img src="Resource/camisa.png" alt=""><svg class="icon icon-lg"><use href="#icon-uniform"/></svg></div>
+      <figure class="carousel3d-item" data-index="4">
+        <img src="Resource/camisa.png" alt="Merch">
         <figcaption>Merch</figcaption>
-      </figure>
-      <figure class="coverflow-item" id="app-10">
-        <div class="app-card-media media--j"><img src="Resource/stand.png" alt=""><svg class="icon icon-lg"><use href="#icon-stand"/></svg></div>
-        <figcaption>Stands / Evento</figcaption>
       </figure>
     </div>
 
-    <button type="button" id="cf-prev" class="cf-btn coverflow-nav coverflow-nav--prev" aria-label="Aplicación anterior">
+    <button type="button" id="c3d-prev" class="c3d-btn c3d-nav c3d-nav--prev" aria-label="Aplicación anterior">
       <svg class="icon"><use href="#icon-arrow-left"/></svg>
     </button>
-    <button type="button" id="cf-next" class="cf-btn coverflow-nav coverflow-nav--next" aria-label="Siguiente aplicación">
-      <svg class="icon"><use href="#icon-arrow-right"/></svg>
-    </button>
+
+    <div class="carousel3d-dots" id="c3d-dots" role="tablist" aria-label="Selecciona una aplicación"></div>
   </div>
 </section>
 
@@ -606,60 +620,6 @@
 
 <div class="section-divider" aria-hidden="true"><span></span></div>
 
-<!-- ================= TIENDA MERCHA EXPO WINNER — 3 productos tipo ecommerce ================= -->
-<section id="tienda-Merch" class="section tienda glow-surface">
-  <div class="section-head">
-    <h2 class="section-title reveal-fade">Tienda Merch Expo Winner</h2>
-  </div>
-  <p class="section-intro reveal-fade">Lleva la marca contigo: la colección oficial de merchandising Expo Winner.</p>
-
-  <!-- Imagen horizontal 1920x1080 — clic para hacer zoom -->
-  <input type="checkbox" id="tienda-zoom-toggle" class="modal-toggle" aria-hidden="true">
-  <label for="tienda-zoom-toggle" class="tienda-hero reveal-image">
-    <img class="tienda-hero-img" src="Resource/imagentienda.png" alt="Tienda Merch Expo Winner">
-  </label>
-  <div class="zoom-overlay" id="tienda-zoom-overlay">
-    <label for="tienda-zoom-toggle" class="zoom-backdrop" aria-hidden="true"></label>
-    <img class="zoom-img" src="Resource/tienda-merch-hero.jpg" alt="Tienda Merch Expo Winner ampliada">
-  </div>
-
-  <div class="producto-grid">
-    <div class="producto-card glass-panel reveal-image">
-      <div class="producto-media">
-        <img src="Resource/merch 2.jpeg" alt="Producto Mercha Expo Winner 1">
-      </div>
-      <h3 class="producto-name">Camiseta Expo Winner</h3>
-      <p class="producto-price">$79.900</p>
-      <a href="#" class="btn-download">
-        <svg class="icon"><use href="#icon-merch"/></svg>
-        <span>Comprar</span>
-      </a>
-    </div>
-    <div class="producto-card glass-panel reveal-image">
-      <div class="producto-media">
-        <img src="Resource/merch 6.jpeg" alt="Producto Mercha Expo Winner 2">
-      </div>
-      <h3 class="producto-name">Gorra Expo Winner</h3>
-      <p class="producto-price">$59.900</p>
-      <a href="#" class="btn-download">
-        <svg class="icon"><use href="#icon-merch"/></svg>
-        <span>Comprar</span>
-      </a>
-    </div>
-    <div class="producto-card glass-panel reveal-image">
-      <div class="producto-media">
-        <img src="Resource/merch5.jpeg" alt="Producto Mercha Expo Winner 3">
-      </div>
-      <h3 class="producto-name">T-shirt Expo winner</h3>
-      <p class="producto-price">$45.900</p>
-      <a href="#" class="btn-download">
-        <svg class="icon"><use href="#icon-merch"/></svg>
-        <span>Comprar</span>
-      </a>
-    </div>
-  </div>
-</section>
-
 <footer class="site-footer site-footer--orange">
   <div class="footer-top">
     <svg class="cube cube--footer cube--mono-white" viewBox="0 0 200 200"><use href="#icon-cube"/></svg>
@@ -689,59 +649,209 @@
     });
   }
 
-  /* ---- 2) Carrusel de Aplicaciones: coverflow real + botones anterior/siguiente ---- */
-  var track = document.getElementById('coverflow');
-  if (track) {
-    var items = Array.prototype.slice.call(track.querySelectorAll('.coverflow-item'));
-    var prevBtn = document.getElementById('cf-prev');
-    var nextBtn = document.getElementById('cf-next');
-    var ticking = false;
+  /* ---- 2) Carrusel de Aplicaciones: motor 3D por índice, 5 imágenes, click/flechas/dots/swipe ---- */
+  var c3dStage = document.getElementById('carousel3d');
+  if (c3dStage) {
+    var c3dItems = Array.prototype.slice.call(c3dStage.querySelectorAll('.carousel3d-item'));
+    var c3dDotsWrap = document.getElementById('c3d-dots');
+    var c3dPrev = document.getElementById('c3d-prev');
 
-    function updateCoverflow() {
-      var rect = track.getBoundingClientRect();
-      var center = rect.left + rect.width / 2;
+    /* Red de seguridad: fija por inline-style la posición lateral del botón anterior,
+       por si algún estilo externo del sitio llegara a interferir con las reglas del CSS. */
+    if (c3dPrev) {
+      c3dPrev.style.position = 'absolute';
+      c3dPrev.style.top = '50%';
+      c3dPrev.style.bottom = 'auto';
+      c3dPrev.style.transform = 'translateY(-50%)';
+      c3dPrev.style.margin = '0';
+      c3dPrev.style.left = '12px';
+      c3dPrev.style.right = 'auto';
+    }
+    var c3dTotal = c3dItems.length;
+    var c3dActive = 0;
+    var c3dDots = [];
 
-      items.forEach(function (item) {
-        var r = item.getBoundingClientRect();
-        var itemCenter = r.left + r.width / 2;
-        var dist = (itemCenter - center) / (rect.width / 2);
-        var clamped = Math.max(-1.3, Math.min(1.3, dist));
-        var rotate = clamped * -30;
-        var scale = 1 - Math.min(Math.abs(clamped), 1) * 0.22;
-        var opacity = 1 - Math.min(Math.abs(clamped), 1) * 0.5;
-        item.style.transform = 'rotateY(' + rotate.toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
-        item.style.opacity = opacity.toFixed(3);
-        item.style.zIndex = String(100 - Math.round(Math.abs(clamped) * 100));
+    if (c3dDotsWrap) {
+      c3dItems.forEach(function (_, i) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', 'Ir a la aplicación ' + (i + 1));
+        dot.addEventListener('click', function () { c3dGoTo(i); });
+        c3dDotsWrap.appendChild(dot);
+        c3dDots.push(dot);
+      });
+    }
+
+    function c3dRender() {
+      var stageWidth = c3dStage.clientWidth || 1;
+      var spacing1 = Math.min(stageWidth * 0.30, 230);
+      var spacing2 = Math.min(stageWidth * 0.52, 400);
+
+      c3dItems.forEach(function (item, i) {
+        var raw = i - c3dActive;
+        if (raw > c3dTotal / 2) raw -= c3dTotal;
+        if (raw < -c3dTotal / 2) raw += c3dTotal;
+
+        var abs = Math.abs(raw);
+        var sign = raw < 0 ? -1 : 1;
+        var tx = 0, scale = 1, rotate = 0, opacity = 1, z = 10;
+
+        if (abs === 0) {
+          tx = 0; scale = 1; rotate = 0; opacity = 1; z = 10;
+        } else if (abs === 1) {
+          tx = sign * spacing1; scale = 0.82; rotate = sign * -26; opacity = 1; z = 6;
+        } else if (abs === 2) {
+          tx = sign * spacing2; scale = 0.64; rotate = sign * -38; opacity = 0.55; z = 3;
+        } else {
+          tx = sign * spacing2 * 1.3; scale = 0.5; rotate = sign * -42; opacity = 0; z = 1;
+        }
+
+        item.style.transform = 'translateX(-50%) translateX(' + tx.toFixed(1) + 'px) scale(' + scale.toFixed(3) + ') rotateY(' + rotate.toFixed(1) + 'deg)';
+        item.style.opacity = opacity.toFixed(2);
+        item.style.zIndex = String(z);
+        item.style.pointerEvents = abs > 2 ? 'none' : 'auto';
+        item.classList.toggle('is-active', abs === 0);
       });
 
-      if (prevBtn) prevBtn.classList.toggle('is-disabled', track.scrollLeft <= 4);
-      if (nextBtn) {
-        var maxScroll = track.scrollWidth - track.clientWidth;
-        nextBtn.classList.toggle('is-disabled', track.scrollLeft >= maxScroll - 4);
+      c3dDots.forEach(function (dot, i) { dot.classList.toggle('is-active', i === c3dActive); });
+    }
+
+    function c3dGoTo(index) {
+      c3dActive = ((index % c3dTotal) + c3dTotal) % c3dTotal;
+      c3dRender();
+    }
+
+    c3dItems.forEach(function (item, i) {
+      item.addEventListener('click', function () { c3dGoTo(i); });
+    });
+
+    if (c3dPrev) {
+      c3dPrev.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        c3dGoTo(c3dActive - 1);
+      });
+    }
+
+    /* Soporte de teclado: flecha izquierda cuando el botón tiene foco */
+    if (c3dPrev) {
+      c3dPrev.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); c3dGoTo(c3dActive - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); c3dGoTo(c3dActive + 1); }
+      });
+    }
+
+    window.addEventListener('resize', c3dRender);
+
+    /* Swipe táctil para mobile */
+    var c3dTouchStartX = null;
+    c3dStage.addEventListener('touchstart', function (e) {
+      c3dTouchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    c3dStage.addEventListener('touchend', function (e) {
+      if (c3dTouchStartX === null) return;
+      var dx = e.changedTouches[0].clientX - c3dTouchStartX;
+      if (Math.abs(dx) > 40) { c3dGoTo(c3dActive + (dx < 0 ? 1 : -1)); }
+      c3dTouchStartX = null;
+    }, { passive: true });
+
+    c3dRender();
+  }
+
+  /* ---- 3) Video Manifiesto: reproducir solo al hacer scroll hasta la sección + audio con control de volumen ---- */
+  var manifiestoVideo = document.getElementById('manifiesto-video');
+  var manifiestoFrame = document.getElementById('manifiesto-frame');
+  var manifiestoAudioBtn = document.getElementById('manifiesto-audio-toggle');
+  var manifiestoVolumeSlider = document.getElementById('manifiesto-volume');
+  var manifiestoLastVolume = 1;
+
+  function manifiestoSetMuted(muted) {
+    manifiestoVideo.muted = muted;
+    manifiestoFrame.classList.toggle('is-unmuted', !muted);
+    if (manifiestoAudioBtn) {
+      manifiestoAudioBtn.setAttribute('aria-label', muted ? 'Activar audio del video' : 'Desactivar audio del video');
+    }
+    if (manifiestoVolumeSlider) {
+      manifiestoVolumeSlider.value = muted ? 0 : (manifiestoVideo.volume || manifiestoLastVolume || 1);
+    }
+  }
+
+  function manifiestoTryPlay() {
+    var playPromise = manifiestoVideo.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(function () {
+        /* Autoplay con audio bloqueado por el navegador: silenciar y reintentar para no dejar el video congelado */
+        if (!manifiestoVideo.muted) {
+          manifiestoSetMuted(true);
+          manifiestoVideo.play().catch(function () {});
+        }
+      });
+    }
+  }
+
+  if (manifiestoVideo && manifiestoFrame) {
+    if ('IntersectionObserver' in window) {
+      var manifiestoObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            if (manifiestoVideo.paused) manifiestoTryPlay();
+          } else {
+            manifiestoVideo.pause();
+          }
+        });
+      }, { threshold: 0.4 });
+      manifiestoObserver.observe(manifiestoFrame);
+    } else {
+      /* Fallback sin soporte de IntersectionObserver: reproducir directamente */
+      manifiestoTryPlay();
+    }
+  }
+
+  var manifiestoAudioControl = document.getElementById('manifiesto-audio-control');
+  if (manifiestoAudioControl) {
+    manifiestoAudioControl.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+  }
+
+  if (manifiestoAudioBtn && manifiestoVideo) {
+    manifiestoAudioBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var nextMuted = !manifiestoVideo.muted;
+      if (!nextMuted && manifiestoVideo.volume === 0) {
+        manifiestoVideo.volume = manifiestoLastVolume || 1;
       }
-      ticking = false;
-    }
-
-    function requestUpdate() {
-      if (!ticking) {
-        window.requestAnimationFrame(updateCoverflow);
-        ticking = true;
+      manifiestoSetMuted(nextMuted);
+      if (!manifiestoVideo.muted && manifiestoVideo.paused) {
+        manifiestoTryPlay();
       }
-    }
+    });
+  }
 
-    function step(direction) {
-      var card = items[0];
-      var gap = 48;
-      var width = card ? card.getBoundingClientRect().width + gap : 300;
-      track.scrollBy({ left: direction * width, behavior: 'smooth' });
-    }
+  /* Al hacer click en cualquier parte del video (fuera del control) se muestra el botón de activación de sonido */
+  if (manifiestoFrame && manifiestoAudioBtn) {
+    manifiestoFrame.addEventListener('click', function () {
+      var alreadyVisible = manifiestoFrame.classList.contains('show-audio-control');
+      if (!alreadyVisible) {
+        manifiestoFrame.classList.add('show-audio-control');
+      } else {
+        /* Si el control ya estaba visible, un click directo en el video activa/desactiva el sonido */
+        manifiestoAudioBtn.click();
+      }
+    });
+  }
 
-    track.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', requestUpdate);
-    if (prevBtn) prevBtn.addEventListener('click', function () { step(-1); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { step(1); });
-
-    updateCoverflow();
+  if (manifiestoVolumeSlider && manifiestoVideo) {
+    manifiestoVolumeSlider.addEventListener('input', function () {
+      var vol = parseFloat(manifiestoVolumeSlider.value);
+      manifiestoVideo.volume = vol;
+      if (vol > 0) { manifiestoLastVolume = vol; }
+      manifiestoSetMuted(vol <= 0);
+      if (!manifiestoVideo.muted && manifiestoVideo.paused) {
+        manifiestoTryPlay();
+      }
+    });
   }
 })();
 </script>

@@ -575,6 +575,88 @@ body.intro-active{ overflow:hidden; height:100vh; }
 .manifiesto-deco--c{ top:14%; right:20%; color:var(--amber); animation-delay:2.6s; }
 @media (max-width:900px){ .manifiesto-deco{ display:none; } }
 
+/* Control de audio liquid glass — botón + slider de volumen, aparece al hacer click sobre el video manifiesto */
+.manifiesto-audio-control{
+  position:absolute;
+  right:clamp(20px,4vw,44px);
+  bottom:clamp(20px,4vw,44px);
+  z-index:3;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  opacity:0;
+  transform:translateY(10px) scale(.94);
+  pointer-events:none;
+  transition:opacity .4s var(--ease-out), transform .4s var(--ease-out);
+}
+.manifiesto-video-frame.show-audio-control .manifiesto-audio-control,
+.manifiesto-audio-control:focus-within{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  pointer-events:auto;
+}
+.manifiesto-video-frame{ cursor:pointer; }
+
+.manifiesto-volume-wrap{
+  display:flex; align-items:center;
+  padding:0 16px;
+  height:44px;
+  border-radius:100px;
+  background:
+    linear-gradient(155deg, rgba(255,255,255,0.18), rgba(255,255,255,0) 45%),
+    linear-gradient(160deg, rgba(35,38,42,0.75) 0%, rgba(12,13,14,0.75) 75%);
+  border:1px solid rgba(255,255,255,0.16);
+  box-shadow:0 12px 28px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.2);
+  backdrop-filter:blur(10px);
+}
+.manifiesto-volume-slider{
+  -webkit-appearance:none;
+  appearance:none;
+  width:96px;
+  height:4px;
+  border-radius:100px;
+  background:rgba(255,255,255,0.3);
+  outline:none;
+  cursor:pointer;
+}
+.manifiesto-volume-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:14px; height:14px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,0.45);
+  cursor:pointer;
+}
+.manifiesto-volume-slider::-moz-range-thumb{
+  width:14px; height:14px;
+  border-radius:50%;
+  background:#fff;
+  border:none;
+  box-shadow:0 2px 10px rgba(0,0,0,0.45);
+  cursor:pointer;
+}
+.manifiesto-volume-slider::-webkit-slider-runnable-track{ height:4px; border-radius:100px; background:transparent; }
+.manifiesto-volume-slider::-moz-range-track{ height:4px; border-radius:100px; background:transparent; }
+
+.manifiesto-audio-btn{
+  position:relative;
+  flex:0 0 auto;
+  width:56px; height:56px;
+  padding:0;
+  border-radius:50%;
+  animation:none;
+}
+.manifiesto-audio-btn .icon{ width:22px; height:22px; position:absolute; }
+.manifiesto-audio-btn .icon-audio-off{ opacity:1; }
+.manifiesto-audio-btn .icon-audio-on{ opacity:0; }
+.manifiesto-video-frame.is-unmuted .manifiesto-audio-btn .icon-audio-off{ opacity:0; }
+.manifiesto-video-frame.is-unmuted .manifiesto-audio-btn .icon-audio-on{ opacity:1; }
+
+@media (max-width:640px){
+  .manifiesto-volume-wrap{ display:none; }
+}
+
 /* ============================================================
    LÍNEA VISUAL
    ============================================================ */
@@ -820,59 +902,122 @@ body.intro-active{ overflow:hidden; height:100vh; }
 }
 
 /* ============================================================
-   APLICACIONES — carrusel Coverflow 3D (CSS puro, scroll-driven)
+   APLICACIONES — carrusel 3D de 5 imágenes (motor por índice en JS)
    ============================================================ */
-.coverflow-wrap{ position:relative; }
-.coverflow{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6vw;
-  padding:40px calc((100% - clamp(220px, 26vw, 300px)) / 2);
-  overflow-x:auto;
-  overflow-y:visible;
-  scroll-snap-type:x mandatory;
-  perspective:1600px;
-  scrollbar-width:none;
-  -ms-overflow-style:none;
-}
-.coverflow::-webkit-scrollbar{ display:none; height:0; }
-
-.coverflow-item{
+.carousel3d-wrap{
   position:relative;
-  flex:0 0 clamp(220px, 26vw, 300px);
+  max-width:1100px;
+  margin:0 auto;
+  padding:clamp(20px,4vw,40px) 0 clamp(48px,6vw,72px);
+}
+.carousel3d{
+  position:relative;
+  height:clamp(300px, 38vw, 440px);
+  perspective:1600px;
+  overflow:hidden;
+}
+.carousel3d-item{
+  position:absolute;
+  top:0; left:50%;
+  width:clamp(190px, 24vw, 280px);
   aspect-ratio:3/4;
-  scroll-snap-align:center;
   border-radius:var(--radius-lg);
   overflow:hidden;
-  display:flex; align-items:flex-end;
-  padding:20px;
   background:var(--glass-bg-2);
   border:1px solid var(--glass-border);
   box-shadow:var(--glass-shadow);
-  backdrop-filter:blur(18px) saturate(150%);
-  transform-style:preserve-3d;
-  opacity: 1 !important;
-  transition:transform .45s var(--ease-out), opacity .45s var(--ease-out), box-shadow .45s var(--ease-out);
-  will-change:transform, opacity;
+  transition:transform .55s var(--ease-out), opacity .55s var(--ease-out), filter .55s var(--ease-out);
+  will-change:transform, opacity, filter;
+  cursor:pointer;
 }
-.coverflow-item:hover{ box-shadow:0 30px 70px rgba(40,30,20,0.2), 0 0 60px rgba(var(--orange-rgb),0.22); }
-.coverflow-item figcaption{
-  position:relative; z-index:1;
+.carousel3d-item img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+.carousel3d-item figcaption{
+  position:absolute; left:16px; bottom:16px; z-index:1;
   font-size:13.5px; font-weight:600; color:#fff;
   padding:7px 13px; border-radius:20px;
   background:rgba(20,20,20,0.45);
   backdrop-filter:blur(8px);
   border:1px solid rgba(255,255,255,0.18);
+  opacity:0;
+  transition:opacity .4s var(--ease-out);
 }
-.app-card-media{
-  position:absolute; inset:0;
-  display:flex; align-items:center; justify-content:center;
-  color:rgba(255,255,255,0.85);
-  transition:transform .6s var(--ease-out);
-}
-.coverflow-item:hover .app-card-media{ transform:scale(1.06); }
+.carousel3d-item.is-active{ cursor:default; }
+.carousel3d-item.is-active figcaption{ opacity:1; }
 
+/* Botones Liquid Glass negros — anterior / siguiente (controlados por JS) */
+/* Especificidad reforzada + !important: garantiza que queden pegados a los laterales
+   del carrusel (anterior = izquierda, siguiente = derecha) sin importar otros estilos del sitio */
+.carousel3d-wrap .c3d-nav{
+  position:absolute !important;
+  top:50% !important;
+  bottom:auto !important;
+  transform:translateY(-50%) !important;
+  z-index:60 !important;
+  pointer-events:auto !important;
+  margin:0 !important;
+}
+.carousel3d-wrap .c3d-nav.c3d-nav--prev{ left:clamp(0px, 1vw, 12px) !important; right:auto !important; }
+.carousel3d-wrap .c3d-nav.c3d-nav--next{ right:clamp(0px, 1vw, 12px) !important; left:auto !important; }
+
+.c3d-btn{
+  display:flex;
+  width:52px; height:52px;
+  border-radius:50%;
+  align-items:center; justify-content:center;
+  color:#fff;
+  cursor:pointer;
+  padding:0;
+  pointer-events:auto;
+  position:relative;
+  background:
+    linear-gradient(155deg, rgba(255,255,255,0.24), rgba(255,255,255,0) 45%),
+    linear-gradient(160deg, #23262a 0%, #0c0d0e 75%);
+  border:1px solid rgba(255,255,255,0.16);
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.35),
+    0 0 38px rgba(255,255,255,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.24);
+  backdrop-filter:blur(10px);
+  transition:transform .4s var(--ease-out), box-shadow .4s var(--ease-out), opacity .3s var(--ease-soft);
+}
+.c3d-btn .icon{ width:18px; height:18px; }
+.c3d-btn:hover{
+  transform:translateY(-50%) scale(1.08);
+  box-shadow:0 16px 38px rgba(0,0,0,0.42), 0 0 55px rgba(255,255,255,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.carousel3d-dots{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  margin-top:clamp(20px,3vw,32px);
+}
+.carousel3d-dots button{
+  width:8px; height:8px;
+  border-radius:50%;
+  padding:0; border:none;
+  background:rgba(var(--petrol-rgb),0.28);
+  cursor:pointer;
+  transition:background .35s var(--ease-out), transform .35s var(--ease-out);
+}
+.carousel3d-dots button.is-active{
+  background:var(--orange);
+  transform:scale(1.3);
+}
+
+@media (max-width:900px){
+  .carousel3d-wrap .c3d-nav.c3d-nav--prev{ left:0 !important; }
+  .carousel3d-wrap .c3d-nav.c3d-nav--next{ right:0 !important; }
+  .c3d-btn{ width:42px; height:42px; }
+  .c3d-btn .icon{ width:15px; height:15px; }
+}
+@media (max-width:560px){
+  .carousel3d{ height:clamp(240px, 62vw, 320px); }
+  .carousel3d-item{ width:clamp(130px, 42vw, 190px); }
+}
 
 /* ============================================================
    PLANIMETRÍA — imagen horizontal de vista en planta
@@ -899,42 +1044,6 @@ body.intro-active{ overflow:hidden; height:100vh; }
 }
 .planimetria-fallback .cube{ width:16%; }
 @media (max-width:640px){ .planimetria-frame{ aspect-ratio:4/3; } }
-
-/* Botones Liquid Glass negros — anterior / siguiente (controlados por JS) */
-.coverflow-nav{
-  position:absolute; top:50%; transform:translateY(-50%);
-  z-index:5;
-}
-.coverflow-nav--prev{ left:clamp(2px, 1.5vw, 20px); }
-.coverflow-nav--next{ right:clamp(2px, 1.5vw, 20px); }
-
-.cf-btn{
-  display:flex;
-  width:52px; height:52px;
-  border-radius:50%;
-  align-items:center; justify-content:center;
-  color:#fff;
-  cursor:pointer;
-  padding:0;
-  background:
-    linear-gradient(155deg, rgba(255,255,255,0.24), rgba(255,255,255,0) 45%),
-    linear-gradient(160deg, #23262a 0%, #0c0d0e 75%);
-  border:1px solid rgba(255,255,255,0.16);
-  box-shadow:
-    0 12px 30px rgba(0,0,0,0.35),
-    0 0 38px rgba(255,255,255,0.2),
-    inset 0 1px 0 rgba(255,255,255,0.24);
-  backdrop-filter:blur(10px);
-  transition:transform .4s var(--ease-out), box-shadow .4s var(--ease-out), opacity .3s var(--ease-soft);
-}
-.cf-btn .icon{ width:18px; height:18px; }
-.cf-btn:hover{
-  transform:scale(1.08);
-  box-shadow:0 16px 38px rgba(0,0,0,0.42), 0 0 55px rgba(255,255,255,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
-}
-.cf-btn.is-disabled{ opacity:.32; pointer-events:none; }
-
-@media (max-width:900px){ .coverflow-nav{ display:none; } }
 
 /* ============================================================
    FOOTER
@@ -1067,6 +1176,45 @@ body.intro-active{ overflow:hidden; height:100vh; }
   .showcase-cards{ grid-template-columns:1fr; gap:16px; }
   .showcase-card{ aspect-ratio:16/10; }
   .showcase-window{ max-width:100%; }
+}
+
+/* ============================================================
+   VIDEO INTRODUCTORIO — bajo ¿Qué es Expo Winner? (cápsula 1920x1080)
+   ============================================================ */
+.video-intro-divider{ margin-top:clamp(40px,6vw,72px); margin-bottom:clamp(28px,4vw,48px); }
+.video-intro-text{
+  max-width:760px;
+  margin:0 auto clamp(28px,4vw,44px);
+  padding:0 clamp(20px, 6vw, 80px);
+  text-align:center;
+  font-size:clamp(15px,1.6vw,18px);
+  color:var(--text-mid);
+}
+.video-intro-capsule{
+  position:relative;
+  max-width:1100px;
+  margin:0 auto clamp(56px,7vw,96px);
+  padding:0 clamp(20px, 6vw, 80px);
+}
+.video-intro-player{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:24px;
+  overflow:hidden;
+  object-fit:cover;
+  background:var(--petrol-dark);
+  border:1px solid rgba(255,255,255,0.14);
+  box-shadow:0 24px 60px rgba(0,0,0,0.35);
+  transition:transform .55s var(--ease-out), box-shadow .55s var(--ease-out);
+}
+.video-intro-capsule:hover .video-intro-player{
+  transform:scale(1.015);
+  box-shadow:0 30px 76px rgba(0,0,0,0.42);
+}
+@media (max-width:700px){
+  .video-intro-capsule{ margin-bottom:44px; }
+  .video-intro-player{ border-radius:16px; }
 }
 
 /* ============================================================
@@ -1280,7 +1428,6 @@ body.intro-active{ overflow:hidden; height:100vh; }
   .logo-variants--3{ grid-template-columns:repeat(3, 1fr); }
   .palette-row{ grid-template-columns:repeat(2, 1fr); }
   .type-cards{ grid-template-columns:1fr; }
-  .coverflow{ padding:40px calc((100% - clamp(220px, 26vw, 300px)) / 2); }
   .showcase-cards{ grid-template-columns:1fr 1fr; }
 }
 
@@ -1292,8 +1439,6 @@ body.intro-active{ overflow:hidden; height:100vh; }
   .logo-variants--3{ grid-template-columns:1fr; max-width:280px; margin:0 auto; }
   .logo-variants--2{ grid-template-columns:1fr; max-width:280px; margin:0 auto; }
   .section-head{ flex-direction:column; align-items:flex-start; gap:6px; }
-  .coverflow{ padding:30px calc((100% - 64vw) / 2); gap:8vw; }
-  .coverflow-item{ flex-basis:64vw; }
   .manifiesto-video-frame{ height:70vh; }
   .showcase-cards{ grid-template-columns:1fr; }
   .footer-top{ flex-direction:column; gap:18px; }
