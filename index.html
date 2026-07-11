@@ -200,12 +200,14 @@
 
   <div class="video-intro-capsule reveal-image">
     <!-- Reemplazar el src por el video destacado, formato horizontal 1920x1080 -->
-    <!-- Sin atributo "poster": el navegador muestra el primer frame real del propio video como miniatura.
-         preload="metadata" es más liviano en datos móviles; un pequeño script fuerza a pintar ese frame
-         (en algunos navegadores mobile la miniatura queda en negro si no se hace un pequeño seek). -->
-    <video id="video-intro-player" class="video-intro-player" controls playsinline preload="metadata">
-      <source src="Resource/Qué es Expowinner Final.mp4" type="video/mp4">
-    </video>
+    <!-- El border-radius/overflow van en el CONTENEDOR (.video-intro-frame), nunca directo en <video>:
+         aplicarlos sobre la propia etiqueta <video> es un bug conocido de iOS/Safari que deja los
+         controles nativos recortados o sin responder al toque en mobile. -->
+    <div class="video-intro-frame">
+      <video id="video-intro-player" class="video-intro-player" controls playsinline preload="metadata">
+        <source src="Resource/Qué es Expowinner Final.mp4" type="video/mp4">
+      </video>
+    </div>
   </div>
 </section>
 
@@ -665,6 +667,27 @@
     } else {
       introVideo.addEventListener('loadedmetadata', paintFirstFrame, { once: true });
     }
+  }
+
+  /* ---- 1.6) FAB flotante: retirarse mientras haya un video en pantalla (mobile) ----
+     El FAB es "position:fixed", así que al hacer scroll puede quedar exactamente encima
+     de los controles nativos del video y bloquear el toque. Este observer lo oculta
+     (fade + pointer-events:none) mientras cualquier <video> esté suficientemente visible. */
+  var navFabWrap = document.querySelector('.nav-fab-wrap');
+  var allVideos = Array.prototype.slice.call(document.querySelectorAll('video'));
+  if (navFabWrap && allVideos.length && 'IntersectionObserver' in window) {
+    var videosInView = new Set();
+    var fabVideoObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          videosInView.add(entry.target);
+        } else {
+          videosInView.delete(entry.target);
+        }
+      });
+      navFabWrap.classList.toggle('is-hidden-for-video', videosInView.size > 0);
+    }, { threshold: 0.25 });
+    allVideos.forEach(function (v) { fabVideoObserver.observe(v); });
   }
 
   /* ---- 2) Carrusel de Aplicaciones: motor 3D por índice, 5 imágenes, click/flechas/dots/swipe ---- */

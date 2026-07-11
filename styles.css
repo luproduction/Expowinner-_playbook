@@ -339,14 +339,25 @@ img{ max-width:100%; display:block; }
   z-index:80;
   flex-direction:column; align-items:flex-end;
   gap:16px;
+  opacity:1;
+  transform:translateY(0) scale(1);
+  transition:opacity .35s var(--ease-soft), transform .35s var(--ease-soft);
 }
 @media (max-width:960px){
   .nav-fab-wrap{ display:flex; }
+}
+/* Mientras haya un video en pantalla, el FAB se retira (fade + no clicable) para no
+   taparle los controles nativos: eso era lo que impedía usar el reproductor en mobile. */
+.nav-fab-wrap.is-hidden-for-video{
+  opacity:0;
+  transform:translateY(10px) scale(.9);
+  pointer-events:none;
 }
 .nav-fab{
   position:relative;
   width:60px; height:60px;
   border-radius:50%;
+  clip-path:circle(50% at 50% 50%);
   display:flex; align-items:center; justify-content:center;
   cursor:pointer;
   color:var(--white);
@@ -1200,25 +1211,33 @@ body.intro-active{ overflow:hidden; height:100vh; }
   margin:0 auto clamp(56px,7vw,96px);
   padding:0 clamp(20px, 6vw, 80px);
 }
-.video-intro-player{
-  display:block;
+/* Contenedor: aquí van border-radius/overflow/transform (NUNCA directo en <video>,
+   porque en iOS/Safari eso rompe o recorta los controles nativos) */
+.video-intro-frame{
+  position:relative;
   width:100%;
   aspect-ratio:16/9;
   border-radius:24px;
   overflow:hidden;
-  object-fit:cover;
   background:var(--petrol-dark);
   border:1px solid rgba(255,255,255,0.14);
   box-shadow:0 24px 60px rgba(0,0,0,0.35);
   transition:transform .55s var(--ease-out), box-shadow .55s var(--ease-out);
 }
-.video-intro-capsule:hover .video-intro-player{
+.video-intro-player{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  background:var(--petrol-dark);
+}
+.video-intro-capsule:hover .video-intro-frame{
   transform:scale(1.015);
   box-shadow:0 30px 76px rgba(0,0,0,0.42);
 }
 @media (max-width:700px){
   .video-intro-capsule{ margin-bottom:44px; }
-  .video-intro-player{ border-radius:16px; }
+  .video-intro-frame{ border-radius:16px; }
 }
 
 /* ============================================================
