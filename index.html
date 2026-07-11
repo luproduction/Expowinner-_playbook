@@ -200,8 +200,10 @@
 
   <div class="video-intro-capsule reveal-image">
     <!-- Reemplazar el src por el video destacado, formato horizontal 1920x1080 -->
-    <!-- Sin atributo "poster": el navegador muestra el primer frame real del propio video como miniatura, en vez de una imagen externa -->
-    <video class="video-intro-player" controls playsinline preload="auto">
+    <!-- Sin atributo "poster": el navegador muestra el primer frame real del propio video como miniatura.
+         preload="metadata" es más liviano en datos móviles; un pequeño script fuerza a pintar ese frame
+         (en algunos navegadores mobile la miniatura queda en negro si no se hace un pequeño seek). -->
+    <video id="video-intro-player" class="video-intro-player" controls playsinline preload="metadata">
       <source src="Resource/Qué es Expowinner Final.mp4" type="video/mp4">
     </video>
   </div>
@@ -647,6 +649,22 @@
       document.body.classList.remove('intro-active');
       window.setTimeout(function () { hero.style.display = 'none'; }, 750);
     });
+  }
+
+  /* ---- 1.5) Video "¿Qué es Expo Winner?": forzar pintura del primer frame como miniatura ----
+     En algunos navegadores mobile (Safari/Chrome con datos móviles), sin "poster" el video
+     puede quedar en negro hasta que el usuario le da play. Este pequeño seek al cargar los
+     metadatos obliga a decodificar y pintar el primer frame real como miniatura. */
+  var introVideo = document.getElementById('video-intro-player');
+  if (introVideo) {
+    var paintFirstFrame = function () {
+      try { introVideo.currentTime = 0.1; } catch (e) {}
+    };
+    if (introVideo.readyState >= 1) {
+      paintFirstFrame();
+    } else {
+      introVideo.addEventListener('loadedmetadata', paintFirstFrame, { once: true });
+    }
   }
 
   /* ---- 2) Carrusel de Aplicaciones: motor 3D por índice, 5 imágenes, click/flechas/dots/swipe ---- */
